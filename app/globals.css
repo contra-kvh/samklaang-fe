@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-black-d text-white font-light text-base;
+    font-size: 10px;
+  }
+
+  body {
+    @apply text-base;
+  }
+}
+
+* {
+  @apply duration-500;
+}
+
+.button-primary {
+  @apply px-16 py-4 bg-white text-black-d flex items-center gap-4 ring-1 ring-black-d hover:ring-white-accent w-fit;
+}
+
+.button-secondary {
+  @apply px-16 py-4 bg-black-d text-white flex items-center gap-4 ring-1 ring-white hover:ring-white-accent w-fit;
+}
+
+.input {
+  @apply bg-black-d placeholder:text-muted ring-1 ring-muted px-8 py-4 focus:ring-white focus:outline-none;
+}
