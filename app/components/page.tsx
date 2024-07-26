@@ -1,6 +1,9 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
 import { PasswordInputBox, TextInputBox } from "@/components/ui/input/";
 import React from "react";
+import {useState} from 'react';
 
 
 interface ComponentsListProps {
@@ -27,9 +30,19 @@ export default function ComponentsGallery() {
         <Button text="Button Secondary" type="secondary" />
       </ComponentsList>
       <ComponentsList title="Input Fields">
-        <TextInputBox placeholder="Organization Email" type="email" />
-        <TextInputBox placeholder="Your Name" />
-        <PasswordInputBox placeholder="Your Password" />
+        <TextInputBox placeholder="Your Email" 
+          validator={(value: string): boolean => {
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            return emailRegex.test(value);
+          }}
+          onChange={(newval: string) => console.log(`password box value changed: ${newval}`)}
+        />
+        <TextInputBox placeholder="Your Name" 
+          onChange={(newval: string) => console.log(`password box value changed: ${newval}`)}
+        />
+        <PasswordInputBox 
+          placeholder="Your Password" 
+          onChange={(newval: string) => console.log(`password box value changed: ${newval}`)}/>
       </ComponentsList>
     </main>
   );
