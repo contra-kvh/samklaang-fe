@@ -8,7 +8,7 @@ export const loginService = async (data: LoginRequest) => {
 };
 
 export const registerService = async (data: RegisterRequest) => {
-  const { email, password } = data;
-  const response = await client.post("/register", { email, password });
+  const { name, email, password } = data;
+  const response = await client.post("/register", { name, email, password });
   return response.data;
 };

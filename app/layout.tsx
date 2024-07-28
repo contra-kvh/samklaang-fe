@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-import AuthProvider from "@/components/AuthProvider";
 
 const geist = GeistSans;
 
@@ -18,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geist.className} bg-black-d text-white-l h-screen`}>
-        {/* <AuthProvider>{children}</AuthProvider> */}
         {children}
       </body>
     </html>

@@ -1,34 +1,45 @@
+"use client";
+
 import { create } from "zustand";
+import { getCookie, setCookie, deleteCookie } from "cookies-next";
 
 interface AuthState {
   isAuthenticated: boolean;
-  user: any;
-  setAuthState: (authState: Partial<AuthState>) => void;
-  logout: () => void;
+  authToken?: string;
+
+  setAuthState: (state: Partial<AuthState>) => void;
+  clearAuthState: () => void;
 }
 
 const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
-  user: null,
-  setAuthState: (authState) => {
-    localStorage.setItem("authState", JSON.stringify(authState));
-    set((state) => ({ ...state, ...authState }));
+  authToken: undefined,
+
+  setAuthState: (state: Partial<AuthState>) => {
+    console.log("Setting auth state: ", state);
+    if (state.authToken) {
+      setCookie("authToken", state.authToken, {
+        path: "/",
+      });
+      set({ isAuthenticated: true, authToken: state.authToken });
+    }
   },
-  logout: () => {
-    localStorage.removeItem("authState");
-    set({ isAuthenticated: false, user: null });
+  clearAuthState: () => {
+    deleteCookie("authToken", { path: "/" });
+    set({ isAuthenticated: false, authToken: undefined });
   },
 }));
 
 export default useAuthStore;
 
 const loadAuthState = () => {
-  const authState = localStorage.getItem("authState");
-  if (authState) {
-    useAuthStore.getState().setAuthState(JSON.parse(authState));
+  const token = getCookie("authToken");
+  console.log("Loaded auth token: ", token);
+  if (token) {
+    useAuthStore.getState().setAuthState({
+      authToken: String(token),
+    });
   }
 };
 
-if (typeof window !== "undefined") {
-  loadAuthState();
-}
+if (typeof window !== "undefined") loadAuthState();

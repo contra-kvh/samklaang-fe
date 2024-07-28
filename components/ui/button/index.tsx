@@ -1,13 +1,19 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
 interface ButtonProps {
   text: string;
   href?: string;
-  type?: 'primary'|'secondary';
+  type?: "primary" | "secondary";
+  onClick?: () => void;
 }
 
-export const Button: React.FC<ButtonProps> = ({ text, href, type = 'primary' }) => {
+export const Button: React.FC<ButtonProps> = ({
+  text,
+  href,
+  type = "primary",
+  onClick,
+}) => {
   if (href) {
     return (
       <Link href={href} className={`button-${type}`}>
@@ -17,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({ text, href, type = 'primary' }) 
     );
   }
   return (
-    <button className={`button-${type}`}>
+    <button className={`button-${type}`} onClick={onClick}>
       {text}
     </button>
   );
