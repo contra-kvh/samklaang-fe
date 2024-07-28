@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation"
 import { PasswordInputBox, TextInputBox } from "@/components/ui/input"
 import useAuth from "@/lib/hooks/useAuth"
 import { Button } from "@/components/ui/button"
-import Spinner from "@/components/ui/spinner"
 
 export interface FormValues {
 	email: string
@@ -14,11 +13,7 @@ export interface FormValues {
 	name: string
 }
 
-interface RegisterFormProps {
-	// onSubmit?: (values: FormValues) => void
-}
-
-export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
+export const RegisterForm: React.FC = () => {
 	const [name, setName] = useState("")
 	const [email, setEmail] = useState("")
 	const [username, setUsername] = useState("")
@@ -58,10 +53,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
 	}
 
 	return (
-		<form
-			onSubmit={handleSubmit}
-			className="w-full max-w-[600px] h-fit flex flex-col gap-8 pr-24"
-		>
+    <form onSubmit={handleSubmit} className="w-full max-w-[600px] h-fit flex flex-col gap-8 pr-24">
 			<TextInputBox
 				className="w-full"
 				placeholder="Name"
@@ -71,7 +63,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
 				className="w-full"
 				placeholder="Username"
 				validator={(value: string): boolean => {
-					return value.length >= 6
+					return value.length > 6
 				}}
 				onChange={setUsername}
 			/>
@@ -91,17 +83,10 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
 				placeholder="Confirm Password"
 				onChange={setCPassword}
 			/>
-			<div className="flex gap-6">
-				<Button
-					text="Register"
-					type="primary"
-					loading={registerStatus.loading}
-				/>
-				<Button text="Login" type="secondary" href="/auth/login" />
-			</div>
-			{registerStatus.error && (
-				<p className="text-red-500">{registerStatus.error}</p>
-			)}
-		</form>
+      <div className="flex gap-6">
+        <Button text="Register" type="primary" loading={registerStatus.loading} />
+        <Button text="Login" type="secondary" href="/auth/login" />
+      </div>
+      </ form>
 	)
 }
