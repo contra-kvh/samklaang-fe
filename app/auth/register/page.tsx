@@ -4,7 +4,11 @@ import { RegisterForm } from "@/components/forms/register"
 
 export default function RegisterPage() {
 	return (
-		<div className="flex items-center justify-center px-10 w-full max-w-[600px]">
+		<div className="h-fit w-full flex flex-col gap-[3.5rem] justify-start px-24">
+			<p className="text-xl">
+				{" "}
+				Welcome! We're excited to get you started.
+			</p>
 			<RegisterForm />
 		</div>
 	)

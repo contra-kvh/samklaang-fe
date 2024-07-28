@@ -15,10 +15,10 @@ export interface FormValues {
 }
 
 interface RegisterFormProps {
-	onSubmit?: (values: FormValues) => void
+	// onSubmit?: (values: FormValues) => void
 }
 
-export const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
+export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
 	const [name, setName] = useState("")
 	const [email, setEmail] = useState("")
 	const [username, setUsername] = useState("")
@@ -60,11 +60,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="w-full px-16 flex flex-col gap-8"
+			className="w-full max-w-[600px] h-fit flex flex-col gap-8 pr-24"
 		>
-			<h2 className="text-lg">
-				Welcome! We're excited to get you started.
-			</h2>
 			<TextInputBox
 				className="w-full"
 				placeholder="Name"
@@ -74,7 +71,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 				className="w-full"
 				placeholder="Username"
 				validator={(value: string): boolean => {
-					return value.length > 6
+					return value.length >= 6
 				}}
 				onChange={setUsername}
 			/>
@@ -94,14 +91,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 				placeholder="Confirm Password"
 				onChange={setCPassword}
 			/>
-			{!registerStatus.loading ? (
-				<div className="flex items-center gap-6">
-					<Button text="Register" type="primary" />
-					<Button text="Log In" type="secondary" />
-				</div>
-			) : (
-				<Spinner />
-			)}
+			<div className="flex gap-6">
+				<Button
+					text="Register"
+					type="primary"
+					loading={registerStatus.loading}
+				/>
+				<Button text="Login" type="secondary" href="/auth/login" />
+			</div>
 			{registerStatus.error && (
 				<p className="text-red-500">{registerStatus.error}</p>
 			)}
