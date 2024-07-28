@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
 import { useState } from "react";
-import { PiEyeDuotone, PiEyeClosedDuotone } from 'react-icons/pi'
+import { PiEyeDuotone, PiEyeClosedDuotone } from "react-icons/pi";
 
 interface PasswordInputProps {
   placeholder: string;
@@ -9,18 +9,22 @@ interface PasswordInputProps {
   onChange: (newval: string) => void;
 }
 
-export const PasswordInputBox: React.FC<PasswordInputProps> = ({placeholder, className='', onChange}: PasswordInputProps) => {
+export const PasswordInputBox: React.FC<PasswordInputProps> = ({
+  placeholder,
+  className = "",
+  onChange,
+}: PasswordInputProps) => {
   const [maskState, setMaskState] = useState<boolean>(true);
 
   return (
     <div className="relative">
-      <input 
-        placeholder={placeholder} 
-        className={`input !pr-16 overflow-clip ${className}`} 
-        type={maskState?'password':'text'} 
+      <input
+        placeholder={placeholder}
+        className={`input !pr-16 overflow-clip ${className}`}
+        type={maskState ? "password" : "text"}
         onChange={(e) => onChange(e.target.value)}
       />
-      <div 
+      <div
         className="absolute right-0 top-0 h-full items-center flex px-4 cursor-pointer"
         onClick={() => setMaskState(!maskState)}
       >
@@ -31,6 +35,5 @@ export const PasswordInputBox: React.FC<PasswordInputProps> = ({placeholder, cla
         )}
       </div>
     </div>
-  )
-}
-
+  );
+};
