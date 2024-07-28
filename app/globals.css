@@ -18,11 +18,19 @@
 }
 
 .button-primary {
-  @apply px-16 py-4 bg-white text-black-d flex items-center gap-4 ring-1 ring-black-d hover:ring-white-accent w-fit;
+  @apply font-normal px-16 py-4 bg-white text-black-d flex items-center gap-4 ring-1 ring-black-d hover:ring-white-accent w-fit;
+}
+
+.button-primary.loading {
+  @apply bg-black-l ring-1 ring-white-accent text-white;
 }
 
 .button-secondary {
   @apply px-16 py-4 bg-black-d text-white flex items-center gap-4 ring-1 ring-white hover:ring-white-accent w-fit;
+}
+
+.button-secondary.loading {
+  @apply bg-black-l ring-1 ring-white-accent;
 }
 
 .input {
