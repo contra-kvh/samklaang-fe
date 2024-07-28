@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
 
   if (
     isAuthenticated &&
-    ["/login", "/register"].includes(request.nextUrl.pathname)
+    ["/auth/login", "/auth/register"].includes(request.nextUrl.pathname)
   ) {
     console.log("Redirecting to /");
     return NextResponse.redirect(new URL("/", request.url));
@@ -14,10 +14,10 @@ export function middleware(request: NextRequest) {
 
   if (
     !isAuthenticated &&
-    !["/login", "/register"].includes(request.nextUrl.pathname)
+    !["/auth/login", "/auth/register"].includes(request.nextUrl.pathname)
   ) {
     console.log("Redirecting to /login");
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
   return NextResponse.next();
