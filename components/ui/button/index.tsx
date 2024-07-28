@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({
   text,
   href,
   type = "primary",
-  loading = true,
+  loading = false,
   onClick,
 }) => {
   if (href) {
