@@ -1,5 +1,3 @@
-"use client";
-
 import { create } from "zustand";
 import { getCookie, setCookie, deleteCookie } from "cookies-next";
 
@@ -25,7 +23,10 @@ const useAuthStore = create<AuthState>((set) => ({
     }
   },
   clearAuthState: () => {
-    deleteCookie("authToken", { path: "/" });
+    deleteCookie("authToken", {
+      path: "/",
+    });
+    console.log("Cleared auth state", document.cookie);
     set({ isAuthenticated: false, authToken: undefined });
   },
 }));
