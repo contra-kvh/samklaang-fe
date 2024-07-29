@@ -4,11 +4,6 @@ import { loginService, registerService } from "@/services/auth";
 import { LoginRequest, RegisterRequest } from "../types/auth";
 import { useRouter } from "next/navigation";
 
-const sampleLoginResponse = {
-  token:
-    "v4.local.UHWOs-NWr7wgV4XK1RO40n-llf1IyGtCbudF0WTCRFZFqIu5_23D84Z2NjXaV0aimjDvl1Ppr6-jy8FHn5-2T4ROMbrNLyJjWg0XCD9OtiBiGaYtTKnOyJhEoKxp7Jjg5riq_wwklgUZccPDtf5_hLd7SnEsWaXyEQQiwgl8Ha_9a7Ky7lFapE9DKPbwGZgc5t2FZ-RJxKxebPvru9jlvooA-KdyCjyqmd7Epcqecctl73cGKttOQofqieFYcF-3fPXdiPTHKWGdilUiuf5Np79opfCnPelPHqFYzB_9",
-};
-
 type AuthStatus = {
   loading: boolean;
   error: string | null;
@@ -42,16 +37,6 @@ const useAuth = () => {
         setLoginStatus({ ...initialStatus, success: true });
         return true;
       } catch (error) {
-        // For demo purposes, we'll use a sample login response
-        setAuthState({
-          isAuthenticated: true,
-          authToken: sampleLoginResponse.token,
-        });
-        setLoginStatus({ ...initialStatus, success: true });
-        return true;
-
-        // uncomment the following code block to handle actual login error
-        /*
         const errorMessage =
           error instanceof Error
             ? error.message
@@ -59,7 +44,6 @@ const useAuth = () => {
         setLoginStatus({ ...initialStatus, error: errorMessage });
         console.error("Login error:", error);
         return false;
-        */
       }
     },
     [setAuthState]
