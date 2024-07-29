@@ -12,6 +12,7 @@ import {
   PiUsersThreeDuotone, 
   PiVideoConferenceDuotone 
 } from 'react-icons/pi';
+import { LogoutButton } from '../logoutbtn';
 
 const sidestrip_items: Array<{
   navTo: string;
@@ -48,9 +49,8 @@ const sidestrip_items: Array<{
 ];
 
 export const Sidestrip: React.FC<{ pathname: string }> = ({ pathname }) => {
-  console.log(`received pathname: ${pathname}`);
   return (
-    <div className="w-fit h-full flex flex-col justify-between text-xl p-4">
+    <div className="w-fit h-full flex flex-col justify-between items-center text-xl p-4">
       <nav className="w-full h-fit flex flex-col gap-4">
         <div className="aspect-square w-full relative">
           <Image src={logo} objectFit="contain" fill={true} alt="logo"/>
@@ -61,7 +61,11 @@ export const Sidestrip: React.FC<{ pathname: string }> = ({ pathname }) => {
           </Link>
         ))}
       </nav>
-      <PiUserCircleGearDuotone />
+      <div className='flex flex-col gap-4 justify-center items-center'>
+        <LogoutButton />
+        <PiUserCircleGearDuotone />
+      </div>
     </div>
   );
 }
+
