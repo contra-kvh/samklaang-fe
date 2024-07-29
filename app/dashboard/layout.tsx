@@ -8,7 +8,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="h-full w-full flex gap-4">
-      <Sidestrip pathname={pathname}/> 
+      <Sidestrip /> 
       {children}
     </div>
   );
