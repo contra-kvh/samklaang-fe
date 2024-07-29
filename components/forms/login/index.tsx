@@ -5,7 +5,6 @@ import { TextInputBox } from "@/components/ui/input/TextInputBox";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter
 import { Button } from "@/components/ui/button";
-import Spinner from "@/components/ui/spinner";
 import useAuth from "@/lib/hooks/useAuth";
 
 export const LoginForm: React.FC = () => {
@@ -27,7 +26,7 @@ export const LoginForm: React.FC = () => {
     console.log("Login success: ", success);
     if (success) {
       console.log("Redirecting to /");
-      router.replace("/"); // Redirect to home page after successful login
+      router.replace("/dashboard"); // Redirect to home page after successful login
     }
   };
 

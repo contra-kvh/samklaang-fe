@@ -11,6 +11,4 @@ const client = axios.create({
   },
 });
 
-console.log(BASE_URL, "BASE_URL");
-
 export default client;
