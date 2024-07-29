@@ -7,6 +7,6 @@ export const LogoutButton: React.FC = () => {
   const { logout } = useAuth();
 
   return (
-    <PiSignOutDuotone onClick={logout} />
+    <PiSignOutDuotone onClick={logout} className='cursor-pointer' />
   );
 }

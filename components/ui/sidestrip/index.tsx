@@ -1,7 +1,11 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '@/public/logo.svg';
+import { usePathname } from 'next/navigation';
+
 import { 
   PiCalendarDuotone, 
   PiCallBellDuotone, 
@@ -48,13 +52,15 @@ const sidestrip_items: Array<{
   }
 ];
 
-export const Sidestrip: React.FC<{ pathname: string }> = ({ pathname }) => {
+export const Sidestrip: React.FC = () => {
+  const pathname = usePathname();
+
   return (
     <div className="w-fit h-full flex flex-col justify-between items-center text-xl p-4">
       <nav className="w-full h-fit flex flex-col gap-4">
-        <div className="aspect-square w-full relative">
+        <Link href="/dashboard" className="aspect-square w-full relative">
           <Image src={logo} objectFit="contain" fill={true} alt="logo"/>
-        </div>
+        </Link>
         {sidestrip_items.map(({ navTo, icon }, index) => (
           <Link key={index} href={`/dashboard${navTo}`} className={`p-4 ${pathname.startsWith(`/dashboard${navTo}`) ? 'text-white-accent ring-1 ring-white-accent' : ''}`}>
             {icon}
@@ -63,7 +69,7 @@ export const Sidestrip: React.FC<{ pathname: string }> = ({ pathname }) => {
       </nav>
       <div className='flex flex-col gap-4 justify-center items-center'>
         <LogoutButton />
-        <PiUserCircleGearDuotone />
+        <PiUserCircleGearDuotone className='cursor-pointer' />
       </div>
     </div>
   );
