@@ -1,5 +1,9 @@
+import { Sidebar } from "@/components/ui/sidebar";
+
 export default function Dashboard() {
   return (
-    <p>Dashboard</p>
+    <Sidebar title="Direct Messages">
+      <p>hello</p>
+    </Sidebar>
   );
 }
