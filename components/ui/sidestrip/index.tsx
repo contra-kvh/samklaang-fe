@@ -56,7 +56,7 @@ export const Sidestrip: React.FC<{ pathname: string }> = ({ pathname }) => {
           <Image src={logo} objectFit="contain" fill={true} alt="logo"/>
         </div>
         {sidestrip_items.map(({ navTo, icon }, index) => (
-          <Link key={index} href={navTo} className={`p-4 ${pathname.startsWith(`/dashboard${navTo}`) ? 'active' : ''}`}>
+          <Link key={index} href={`/dashboard${navTo}`} className={`p-4 ${pathname.startsWith(`/dashboard${navTo}`) ? 'text-white-accent ring-1 ring-white-accent' : ''}`}>
             {icon}
           </Link>
         ))}
