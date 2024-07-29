@@ -4,27 +4,31 @@ export function middleware(request: NextRequest) {
   const authToken = request.cookies.get("authToken")?.value;
   const isAuthenticated = Boolean(authToken);
 
-  // Set the custom x-url header
   const requestUrl = request.url;
-  request.headers.set('x-url', requestUrl);
 
   let response;
-  
+
   if (
     isAuthenticated &&
     ["/auth/login", "/auth/register"].includes(request.nextUrl.pathname)
   ) {
-    response = NextResponse.redirect(new URL("/dashboard", requestUrl));
-  } else if (
+    console.log("Redirecting to /");
+    response = NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  if (
     !isAuthenticated &&
     !["/auth/login", "/auth/register", "/"].includes(request.nextUrl.pathname)
   ) {
-    response = NextResponse.redirect(new URL("/auth/login", requestUrl));
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   } else {
-    response = NextResponse.next();
+    response = NextResponse.next()
   }
 
-  // Set the x-url header on the response
   response.headers.set('x-url', requestUrl);
   return response;
 }
+
+export const config = {
+  matcher: ["/((?!_next|static|favicon.ico).*)"],
+};
