@@ -1,5 +1,7 @@
 'use client';
 
+import { LoginForm } from "@/components/forms/login";
+import { RegisterForm } from "@/components/forms/register";
 import { Button } from "@/components/ui/button";
 import { PasswordInputBox, TextInputBox } from "@/components/ui/input/";
 import React from "react";
@@ -43,6 +45,10 @@ export default function ComponentsGallery() {
         <PasswordInputBox 
           placeholder="Your Password" 
           onChange={(newval: string) => console.log(`password box value changed: ${newval}`)}/>
+      </ComponentsList>
+      <ComponentsList title="Forms">
+        <LoginForm />
+        <RegisterForm />
       </ComponentsList>
     </main>
   );

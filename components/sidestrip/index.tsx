@@ -16,7 +16,7 @@ import {
   PiUsersThreeDuotone, 
   PiVideoConferenceDuotone 
 } from 'react-icons/pi';
-import { LogoutButton } from '../logoutbtn';
+import { LogoutButton } from '@/components/ui/logoutbtn';
 
 const sidestrip_items: Array<{
   navTo: string;
@@ -56,10 +56,10 @@ export const Sidestrip: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-fit h-full flex flex-col justify-between items-center text-xl p-4">
+    <div className="w-fit h-full flex flex-col justify-between items-center text-lg p-4">
       <nav className="w-full h-fit flex flex-col gap-4">
         <Link href="/dashboard" className="aspect-square w-full relative">
-          <Image src={logo} objectFit="contain" fill={true} alt="logo"/>
+          <Image src={logo} style={{objectFit: 'cover'}} fill={true} alt="logo"/>
         </Link>
         {sidestrip_items.map(({ navTo, icon }, index) => (
           <Link key={index} href={`/dashboard${navTo}`} className={`p-4 ${pathname.startsWith(`/dashboard${navTo}`) ? 'text-white-accent ring-1 ring-white-accent' : ''}`}>

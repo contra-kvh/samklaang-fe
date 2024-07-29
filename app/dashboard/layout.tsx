@@ -1,5 +1,5 @@
 import { headers } from 'next/headers';
-import { Sidestrip } from "@/components/ui/sidestrip";
+import { Sidestrip } from "@/components/sidestrip";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const headersList = headers();
