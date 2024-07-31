@@ -2,13 +2,11 @@ import { LoginRequest, RegisterRequest } from "@/lib/types/auth";
 import client from "./client";
 
 export const loginService = async (data: LoginRequest) => {
-  const { email, password } = data;
-  const response = await client.post("/api/login", { email, password });
+  const response = await client.post("/api/auth/login", data);
   return response.data;
 };
 
 export const registerService = async (data: RegisterRequest) => {
-  const { name, email, password } = data;
-  const response = await client.post("/api/register", { name, email, password });
+  const response = await client.post("/api/auth/register", data);
   return response.data;
 };
