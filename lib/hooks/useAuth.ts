@@ -29,6 +29,7 @@ const useAuth = () => {
       setLoginStatus({ ...initialStatus, loading: true });
       try {
         const data = await loginService({ email, password });
+        console.log("Login Response data: ", data);
         setAuthState({
           isAuthenticated: true,
           authToken: data.token,
@@ -50,10 +51,16 @@ const useAuth = () => {
   );
 
   const register = useCallback(
-    async ({ name, email, password }: RegisterRequest) => {
+    async ({ name, email, password, designation }: RegisterRequest) => {
       setRegisterStatus({ ...initialStatus, loading: true });
       try {
-        const data = await registerService({ name, email, password });
+        const data = await registerService({
+          name,
+          email,
+          password,
+          designation,
+        });
+        console.log("Register Response data: ", data);
         setAuthState({ isAuthenticated: true, authToken: data.token });
         setRegisterStatus({ ...initialStatus, success: true });
         return true;

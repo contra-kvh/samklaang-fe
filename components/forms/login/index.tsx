@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { PasswordInputBox } from "@/components/ui/input/PasswordInputBox";
 import { TextInputBox } from "@/components/ui/input/TextInputBox";
@@ -16,17 +16,18 @@ export const LoginForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (email === "" || password === "") {
+    if (email === "" || password === "" || !emailValidator(email)) {
       return;
     }
+
     console.log("Email: ", email);
     console.log("Password: ", password);
 
     const success = await login({ email, password });
     console.log("Login success: ", success);
     if (success) {
-      console.log("Redirecting to /");
-      router.replace("/dashboard"); // Redirect to home page after successful login
+      console.log("Redirecting to /dashboard");
+      router.replace("/dashboard");
     }
   };
 
@@ -34,22 +35,28 @@ export const LoginForm: React.FC = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(value);
   };
+
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-[600px] h-fit flex flex-col gap-8 pr-24">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full max-w-[600px] h-fit flex flex-col gap-8 pr-24"
+    >
       <TextInputBox
         placeholder="Organization Email"
         onChange={setEmail}
         validator={emailValidator}
         className="w-full"
       />
-      <PasswordInputBox placeholder="Password" onChange={setPassword} className="w-full" />
+      <PasswordInputBox
+        placeholder="Password"
+        onChange={setPassword}
+        className="w-full"
+      />
       <div className="flex gap-6">
         <Button text="Login" type="primary" loading={loginStatus.loading} />
         <Button text="Register" type="secondary" href="/auth/register" />
       </div>
-      {loginStatus.error && (
-        <p className="text-red-500">{loginStatus.error}</p>
-      )}
+      {loginStatus.error && <p className="text-red-500">{loginStatus.error}</p>}
     </form>
   );
-}
+};
