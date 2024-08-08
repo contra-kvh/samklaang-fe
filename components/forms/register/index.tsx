@@ -14,9 +14,10 @@ export interface FormValues {
 }
 
 export const RegisterForm: React.FC = () => {
-	const [name, setName] = useState("")
+	const [firstName, setFirstName] = useState("")
+	const [lastName, setLastName] = useState("")
 	const [email, setEmail] = useState("")
-	const [username, setUsername] = useState("")
+	const [designation, setDesignation] = useState("")
 	const [password, setPassword] = useState("")
 	const [cPassword, setCPassword] = useState("")
 	const { register, registerStatus } = useAuth()
@@ -28,18 +29,25 @@ export const RegisterForm: React.FC = () => {
 		if (
 			email === "" ||
 			password === "" ||
-			name == "" ||
-			username == "" ||
+			firstName == "" ||
+			lastName == "" ||
+			designation == "" ||
 			cPassword != password
 		) {
 			return
 		}
-		console.log("Name: ", name)
-		console.log("Username: ", username)
+		console.log("Name: " + firstName + " " + lastName)
+		console.log("Designation: ", designation)
 		console.log("Email: ", email)
 		console.log("Password: ", password)
 
-		const success = await register({ email, password, name })
+		const success = await register({
+			email,
+			password,
+			firstName,
+			lastName,
+			designation,
+		})
 		console.log("Register success: ", success)
 		if (success) {
 			console.log("Redirecting to /")
@@ -53,19 +61,27 @@ export const RegisterForm: React.FC = () => {
 	}
 
 	return (
-    <form onSubmit={handleSubmit} className="w-full max-w-[600px] h-fit flex flex-col gap-8 pr-24">
+		<form
+			onSubmit={handleSubmit}
+			className="w-full max-w-[600px] h-fit flex flex-col gap-8 pr-24"
+		>
 			<TextInputBox
 				className="w-full"
-				placeholder="Name"
-				onChange={setName}
+				placeholder="First Name"
+				onChange={setFirstName}
 			/>
 			<TextInputBox
 				className="w-full"
-				placeholder="Username"
+				placeholder="Last Name"
+				onChange={setLastName}
+			/>
+			<TextInputBox
+				className="w-full"
+				placeholder="Designation"
 				validator={(value: string): boolean => {
-					return value.length > 6
+					return value.length > 0
 				}}
-				onChange={setUsername}
+				onChange={setDesignation}
 			/>
 			<TextInputBox
 				className="w-full"
@@ -83,10 +99,14 @@ export const RegisterForm: React.FC = () => {
 				placeholder="Confirm Password"
 				onChange={setCPassword}
 			/>
-      <div className="flex gap-6">
-        <Button text="Register" type="primary" loading={registerStatus.loading} />
-        <Button text="Login" type="secondary" href="/auth/login" />
-      </div>
-      </ form>
+			<div className="flex gap-6">
+				<Button
+					text="Register"
+					type="primary"
+					loading={registerStatus.loading}
+				/>
+				<Button text="Login" type="secondary" href="/auth/login" />
+			</div>
+		</form>
 	)
 }
